@@ -26,6 +26,7 @@ class App extends Component {
       ],
       // will be modified to reflect the code used to build the graph
       codeText: '',
+      
       // reflect the type of graph chosen by user
       // defaulted to Bar Chart
       type: 'PieChart',
@@ -44,9 +45,9 @@ class App extends Component {
           'yTitle',
         ],
         PieChart: [
-          'barColor',
-          'chartHeight',
           'chartWidth',
+          'chartHeight',
+          'chartTitle',
         ]
       },
 
@@ -54,10 +55,10 @@ class App extends Component {
       chartTitle: { value: 'Name', type: 'text' },
       chartHeight: { value: 300, type: 'number' },
       chartWidth: { value: 450, type: 'number' },
-      chartBGColor: { value: '#ffffff', type: 'color' },
-      xTitle: { value: 'xTitle', type: 'text' },
-      yTitle: { value: 'yTitle', type: 'text' },
-      barColor: { value: '#003078', type: 'color' },
+      chartBGColor: { value: '#fbfbfb', type: 'color' },
+      xTitle: { value: 'Quartiles', type: 'text' },
+      yTitle: { value: 'Rainfall (cm)', type: 'text' },
+      barColor: { value: '#7e8471', type: 'color' },
       barMargin: { value: 2, type: 'number' },
     };
 
