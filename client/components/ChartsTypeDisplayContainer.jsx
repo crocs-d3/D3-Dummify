@@ -1,5 +1,6 @@
 import React from 'react';
 import ChartTypeDisplay from './ChartTypeDisplay.jsx';
+import { Button } from './../Styles/styledComponents';
 
 const ChartTypeDisplayContainer = props => {
   // const charts = props.types.map((chart, i) => (
@@ -10,7 +11,7 @@ const ChartTypeDisplayContainer = props => {
   //   />
   // ));
   return (
-    <button onClick={props.changeGraph}></button>
+    <Button onClick={props.changeGraph}>Change graph</Button>
   )
 }
 

@@ -29,7 +29,7 @@ class App extends Component {
       
       // reflect the type of graph chosen by user
       // defaulted to Bar Chart
-      type: 'PieChart',
+      type: 'BarChart',
 
       // options that can be modified by user for each type 
       // of graphs available in the app
