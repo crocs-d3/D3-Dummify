@@ -7,7 +7,7 @@ class PieChart extends Chart {
     const height = this.props.options.chartHeight.value;
 
     const arc = d3.arc()
-      .innerRadius(0)
+      .innerRadius(50)
       .outerRadius(Math.min(width, height) / 2 - 1);
 
     const pie = d3.pie()

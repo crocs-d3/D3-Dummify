@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
+import path from 'path';
+
 
 //import styled components
 import { MainWrapper, Title, GraphAndOptionsWrapper } from './../Styles/styledComponents';
 
 //import components to render
+import ChartTypeDisplayContainer from './ChartsTypeDisplayContainer.jsx';
 import OptionsDisplay from './OptionsDisplay.jsx';
 import ChartDisplay from './ChartDisplay.jsx';
 import Navbar from './Navbar.jsx';
@@ -60,6 +63,7 @@ class App extends Component {
     // binding functions that are passed to children components
     this.handleChange = this.handleChange.bind(this);
     this.updateCodeText = this.updateCodeText.bind(this);
+    this.changeGraph = this.changeGraph.bind(this);
   }
 
   // handle user interaction with inputs
@@ -83,8 +87,15 @@ class App extends Component {
     this.setState({ codeText });
   }
 
+  changeGraph(){
+    const newType = this.state.type === 'PieChart' ? 'BarChart' : "PieChart";
+    this.setState({
+      type: newType,
+    })
+  }
+
   render() {
-    const { graphs, type, codeText, data } = this.state;
+    const { graphs, type, codeText, data, imgs } = this.state;
 
     // filter out the options to only pass the props that correspond
     // to a chosen graph
@@ -97,6 +108,11 @@ class App extends Component {
         {/* Navbar to be developed */}
         <Navbar />
         <Title>D3 Simplifier</Title>
+
+        <ChartTypeDisplayContainer
+          types={Object.keys(graphs)} 
+          changeGraph={this.changeGraph}
+        />
         <GraphAndOptionsWrapper>
           {/* Container that has each option as a child components */}
           <OptionsDisplay options={optionsToPass} handleChange={this.handleChange} />

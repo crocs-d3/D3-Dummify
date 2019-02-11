@@ -78,3 +78,15 @@ export const FooterWrapper = styled.footer`
   font-size: 0.9em;
   margin: 3em 0 1em 0;
 `;
+
+export const Button = styled.button`
+  font-size: 1.3em;
+  padding: 0.5em;
+  border-radius: 5px;
+  outline: none;
+  box-shadow: 2px 2px 5px 0px rgba(0,0,0,0.75);
+
+  &:hover {
+    background-color: white;
+  }
+`;
