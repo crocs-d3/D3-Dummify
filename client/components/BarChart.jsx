@@ -1,6 +1,5 @@
 import Chart from '../classes/Chart';
 import * as d3 from 'd3';
-import Chart from '../classes/Chart.js';
 
 class BarChart extends Chart {
   plotGraph() {
