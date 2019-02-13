@@ -70,6 +70,12 @@ class BubbleChart extends Chart {
     const svgWidth = this.props.options.chartWidth.value;
     const svgHeight = this.props.options.chartHeight.value;
     const chartName = this.props.options.chartTitle.value;
+    const data = [
+      { name: 'Q1', value: 20 },
+      { name: 'Q2', value: 70 },
+      { name: 'Q3', value: 5 },
+      { name: 'Q4', value: 30 },
+    ]
 
     // Constructs a new ordinal scale with the specified range
     this.color = d3.scaleOrdinal(d3.schemeCategory10);
@@ -82,10 +88,10 @@ class BubbleChart extends Chart {
       d3
         .pack()
         .size([svgWidth - 2, svgHeight - 2])
-        .padding(3)(d3.hierarchy({ children: this.props.data }).sum(d => d.value));
+        .padding(3)(d3.hierarchy({ children: data }).sum(d => d.value));
 
     // Constructs root node from data for hierarchy data types.
-    const root = this.pack(this.props.data);
+    const root = this.pack(data);
 
     // Style the <svg> element
     const svg = d3

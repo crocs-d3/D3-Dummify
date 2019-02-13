@@ -70,6 +70,12 @@ class PieChart extends Chart {
     this.props.updateCodeText(`
       const radius = 350;
       const height = 400;
+      const data = [
+        { name: 'Q1', value: 20 },
+        { name: 'Q2', value: 70 },
+        { name: 'Q3', value: 5 },
+        { name: 'Q4', value: 30 },
+      ]
 
       const arc = d3.arc()
         .innerRadius(0)
@@ -84,11 +90,11 @@ class PieChart extends Chart {
         return d3.arc().innerRadius(radius).outerRadius(radius);
       };
       
-      const arcs = pie(this.props.data);
+      const arcs = pie(data);
 
       const color = d3.scaleOrdinal()
-        .domain(this.props.data.map(d => d.name))
-        .range(d3.quantize(t => d3.interpolateSpectral(t * 0.8 + 0.1), this.props.data.length).reverse())
+        .domain(data.map(d => d.name))
+        .range(d3.quantize(t => d3.interpolateSpectral(t * 0.8 + 0.1), data.length).reverse())
         
       const svg = 
         d3.select('svg#plot_cont')

@@ -102,7 +102,6 @@ class App extends Component {
 
 
   updateCodeText(codeText) {
-    console.log('codetext', codeText);
     this.setState({ codeText });
   }
 
@@ -113,7 +112,7 @@ class App extends Component {
   }
 
   render() {
-    const { graphs, type, codeText, data, imgs } = this.state;
+    const { graphs, type, codeText, data } = this.state;
     // filter out the options to only pass the props that correspond
     // to a chosen graph
     const optionsToPass = graphs[type].reduce((acc, option) => {
