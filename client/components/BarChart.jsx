@@ -2,7 +2,7 @@ import Chart from '../classes/Chart';
 import * as d3 from 'd3';
 
 class BarChart extends Chart {
-  plotGraph() {
+  plotGraph(el) {
     const xData = [];
     const yData = [];
 
@@ -39,7 +39,7 @@ class BarChart extends Chart {
       .rangeRound([0, svgWidth])
       .padding(0);
 
-    const chart = d3.select('svg#plot_cont');
+    const chart = d3.select(el);
 
     // We style the <svg> element, as well as all the <rect>
     // created that represent the bars in our graph
@@ -125,23 +125,26 @@ class BarChart extends Chart {
             .style('opacity', 1);
         });
     }
+
+    return el;
   }
 
   updateCode(nextProps) {
     this.props.updateCodeText(`
       // Define basic graph properties 
-      const xData = [20, 70, 5, 30];
-      const yData = ['Q1', 'Q2', 'Q3', 'Q4'];
-      const svgWidth = ${nextProps.chartWidth.value};
-      const svgHeight = ${nextProps.chartHeight.value};
-      const barPadding = ${nextProps.barMargin.value};
-      const barColor = ${nextProps.barColor.value};
-      const bgColor = ${nextProps.chartBGColor.value};
-      const chartName = ${nextProps.chartTitle.value};
-      const yTitle = ${nextProps.yTitle.value};
-      const xTitle = ${nextProps.xTitle.value};
-      const barWidth = ${nextProps.chartWidth.value / 4};
+      const xData = [${nextProps.data.map(el => "el.name")}];
+      const yData = [${nextProps.data.map(el => el.value)}];
+      const svgWidth = ${nextProps.options.chartWidth.value};
+      const svgHeight = ${nextProps.options.chartHeight.value};
+      const barPadding = ${nextProps.options.barMargin.value};
+      const barColor = "${nextProps.options.barColor.value}";
+      const bgColor = "${nextProps.options.chartBGColor.value}";
+      const chartName = "${nextProps.options.chartTitle.value}";
+      const yTitle = "${nextProps.options.yTitle.value}";
+      const xTitle = "${nextProps.options.xTitle.value}";
+      const barWidth = ${nextProps.options.chartWidth.value / 4};
       const margin = 40;  
+
 
       // Creates a linear scale for the y-axis. The domain represents the values
       // on the scale. The range, the height of the y-axis on the svg element.
@@ -158,10 +161,10 @@ class BarChart extends Chart {
         .rangeRound([0, svgWidth])
         .padding(0);
   
-      // 'svg#plot_cont' is the CSS-selector for the element we 
-      // want to plot the graph in.
-      const chart = d3.select('svg#plot_cont');
+      // el is the svg passed to the function that creates the graph
+      const chart = d3.select(el);
 
+      
       chart
         // styles the svg component
         .style("background-color", bgColor)
@@ -176,7 +179,7 @@ class BarChart extends Chart {
         // select all <rect> inside of that <g> we just created.
         // ps: there are none!  
         .selectAll('rect')
-        .data(dataset)
+        .data(yData)
 
         // we append and style one <rect> for each value in our dataset.
         .enter().append('rect')
@@ -232,6 +235,7 @@ class BarChart extends Chart {
         .style('font-weight', 'bold')
         .style('text-anchor', 'middle')
         .text(yTitle);
+
     `);
   }
 }

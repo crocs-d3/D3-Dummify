@@ -2,12 +2,17 @@ import React from "react";
 
 const ChartTypeDisplay = props => {
   const { type } = props;
-  `~/`
-  const src = `./../imgs/${type}`;
+  const src = require(`./../imgs/${type}.png`);
+  // console.log('src', src);
   return (
     <div>
-      <h3>{type}</h3>
-      {/* <img src={src} alt={type} /> */}
+      <h4>{type}</h4>
+      <img
+        src={require(`./../imgs/${type}.png`)}
+        width="120px"
+        alt={type}
+        onClick={props.changeGraph} 
+      />
     </div>
   ) 
 }
