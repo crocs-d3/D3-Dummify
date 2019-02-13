@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import path from 'path';
 
-
 //import styled components
 import { MainWrapper, Title, GraphAndOptionsWrapper } from './../Styles/styledComponents';
 
@@ -19,17 +18,17 @@ class App extends Component {
     super();
     this.state = {
       data: [
-        { name: 'Q1', value: 20 },
-        { name: 'Q2', value: 70 },
-        { name: 'Q3', value: 5 },
-        { name: 'Q4', value: 30 },
+        { name: 200, value: 20 },
+        { name: 300, value: 70 },
+        { name: 300, value: 5 },
+        { name: 500, value: 30 },
       ],
       // will be modified to reflect the code used to build the graph
       codeText: '',
 
       // reflect the type of graph chosen by user
       // defaulted to Bar Chart
-      type: 'BarChart',
+      type: 'LineChart',
 
       // options that can be modified by user for each type
       // of graphs available in the app
@@ -46,6 +45,7 @@ class App extends Component {
           'transition',
         ],
         PieChart: ['chartWidth', 'chartHeight', 'chartTitle'],
+        LineChart: ['chartTitle', 'chartWidth', 'chartHeight'],
       },
 
       // all option options
@@ -87,11 +87,11 @@ class App extends Component {
     this.setState({ codeText });
   }
 
-  changeGraph(){
-    const newType = this.state.type === 'PieChart' ? 'BarChart' : "PieChart";
+  changeGraph() {
+    const newType = this.state.type === 'LineChart' ? 'BarChart' : 'LineChart';
     this.setState({
       type: newType,
-    })
+    });
   }
 
   render() {
@@ -109,10 +109,7 @@ class App extends Component {
         <Navbar />
         <Title>D3 Simplifier</Title>
 
-        <ChartTypeDisplayContainer
-          types={Object.keys(graphs)} 
-          changeGraph={this.changeGraph}
-        />
+        <ChartTypeDisplayContainer types={Object.keys(graphs)} changeGraph={this.changeGraph} />
         <GraphAndOptionsWrapper>
           {/* Container that has each option as a child components */}
           <OptionsDisplay options={optionsToPass} handleChange={this.handleChange} />
@@ -124,7 +121,6 @@ class App extends Component {
             type={type}
           />
         </GraphAndOptionsWrapper>
-
         <CodeDisplay codeText={codeText} />
         <Footer />
       </MainWrapper>

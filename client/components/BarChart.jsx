@@ -1,5 +1,5 @@
-import Chart from '../classes/Chart';
 import * as d3 from 'd3';
+import Chart from '../classes/Chart';
 
 class BarChart extends Chart {
   plotGraph() {
@@ -78,10 +78,7 @@ class BarChart extends Chart {
     // adding text label & stlying for Chart Name
     chart
       .append('text')
-      .attr(
-        'transform',
-        'translate(' + (svgWidth / 2 + margin) + ',' + (Math.max(...yData) - margin) + ')',
-      )
+      .attr('transform', `translate(${svgWidth / 2 + margin},${Math.max(...yData) - margin})`)
       .style('font-size', '1.5em')
       .style('font-weight', 'bold')
       .style('text-anchor', 'middle')
@@ -112,13 +109,13 @@ class BarChart extends Chart {
 
     if (transition === '') {
       d3.selectAll('rect')
-        .on('mouseover', function(d, i) {
+        .on('mouseover', function (d, i) {
           d3.select(this)
             .transition()
             .duration(200)
             .style('opacity', 0.7);
         })
-        .on('mouseout', function(d, i) {
+        .on('mouseout', function (d, i) {
           d3.select(this)
             .transition()
             .duration(200)
