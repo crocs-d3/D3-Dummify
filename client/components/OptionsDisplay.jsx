@@ -1,6 +1,6 @@
 import React from 'react';
 import OptionDisplay from './OptionDisplay.jsx';
-import { OptionsWrapper, LabelWrapper, OptionsTitle } from './../Styles/styledComponents';
+import { OptionsWrapper, OptionsTitle } from './../Styles/styledComponents';
 
 const OptionsDisplay = props => {
   // iterate through the options passed in
