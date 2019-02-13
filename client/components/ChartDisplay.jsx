@@ -1,7 +1,9 @@
-import React from "react";
-import BarChart from "./BarChart.jsx";
-import PieChart from "./PieChart.jsx";
-import { ChartWrapper} from "./../Styles/styledComponents";
+import React from 'react';
+import BarChart from './BarChart.jsx';
+import PieChart from './PieChart.jsx';
+import BubbleChart from './BubbleChart.jsx';
+import LineChart from './LineChart.jsx';
+import { ChartWrapper} from './../Styles/styledComponents';
 
 const ChartDisplay = props => {
   // allows to change the graph being displayed
@@ -9,6 +11,8 @@ const ChartDisplay = props => {
   const children = {
     BarChart: <BarChart {...props}/>,
     PieChart: <PieChart {...props}/>,
+    BubbleChart: <BubbleChart {...props} />,
+    LineChart: <LineChart {...props} />
   }
   return (
     <ChartWrapper>

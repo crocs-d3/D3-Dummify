@@ -2,7 +2,8 @@ import * as d3 from 'd3';
 import Chart from '../classes/Chart';
 
 class BubbleChart extends Chart {
-  plotGraph() {
+  plotGraph(el) {
+
     const svgWidth = this.props.options.chartWidth.value;
     const svgHeight = this.props.options.chartHeight.value;
     const chartName = this.props.options.chartTitle.value;
@@ -20,9 +21,9 @@ class BubbleChart extends Chart {
     const root = this.pack(this.props.data);
     // Style the <svg> element
     const svg = d3
-      .select('svg#plot_cont')
-      .style('width', svgWidth)
-      .style('height', svgHeight)
+      .select(el)
+      .attr('width', svgWidth)
+      .attr('height', svgHeight)
       .attr('font-size', 16)
       .attr('font-family', 'sans-serif')
       .attr('text-anchor', 'middle');
@@ -40,7 +41,8 @@ class BubbleChart extends Chart {
     const leaf = svg
       .selectAll('g')
       .data(root.leaves())
-      .join('g')
+      .enter()
+      .append('g')
       .attr('transform', d => `translate(${d.x + 1},${d.y + 1})`);
     // Create and style circles
     leaf
@@ -53,10 +55,13 @@ class BubbleChart extends Chart {
       .append('text')
       .selectAll('tspan')
       .data(d => d.data.name)
-      .join('tspan')
+      .enter()
+      .append('tspan')
       .attr('x', 0)
       .attr('y', (d, i, nodes) => `${i - nodes.length / 2 + 0.8}em`)
       .text(d => d);
+    
+      return el;
   }
 
   updateCode(nextProps) {
@@ -65,6 +70,12 @@ class BubbleChart extends Chart {
     const svgWidth = this.props.options.chartWidth.value;
     const svgHeight = this.props.options.chartHeight.value;
     const chartName = this.props.options.chartTitle.value;
+    const data = [
+      { name: 'Q1', value: 20 },
+      { name: 'Q2', value: 70 },
+      { name: 'Q3', value: 5 },
+      { name: 'Q4', value: 30 },
+    ]
 
     // Constructs a new ordinal scale with the specified range
     this.color = d3.scaleOrdinal(d3.schemeCategory10);
@@ -77,10 +88,10 @@ class BubbleChart extends Chart {
       d3
         .pack()
         .size([svgWidth - 2, svgHeight - 2])
-        .padding(3)(d3.hierarchy({ children: this.props.data }).sum(d => d.value));
+        .padding(3)(d3.hierarchy({ children: data }).sum(d => d.value));
 
     // Constructs root node from data for hierarchy data types.
-    const root = this.pack(this.props.data);
+    const root = this.pack(data);
 
     // Style the <svg> element
     const svg = d3

@@ -1,8 +1,10 @@
+import ReactFauxDOM from 'react-faux-dom';
+import React from 'react';
 import * as d3 from 'd3';
 import Chart from '../classes/Chart.js';
 
 class PieChart extends Chart {
-  plotGraph() {
+  plotGraph(el) {
     const width = this.props.options.chartWidth.value;
     const height = this.props.options.chartHeight.value;
 
@@ -25,7 +27,7 @@ class PieChart extends Chart {
       .domain(this.props.data.map(d => d.name))
       .range(d3.quantize(t => d3.interpolateSpectral(t * 0.8 + 0.1), this.props.data.length).reverse())
       
-    const svg = d3.select('svg#plot_cont')
+    const svg = d3.select(el)
         .attr("width", width)
         .attr("height", height)
         .attr("text-anchor", "middle")
@@ -38,7 +40,6 @@ class PieChart extends Chart {
       .data(arcs)
       .enter().append("path")
       .attr("fill", d => color(d.data.name)) 
-      // .attr("fill", barColor)
       .attr("stroke", "white")
       .attr("d", arc)
       .append("title")
@@ -61,12 +62,20 @@ class PieChart extends Chart {
       .attr("y", "0.7em")
       .attr("fill-opacity", 0.7)
       .text(d => d.data.value.toLocaleString());
+
+      return el;
   }
 
   updateCode(nextProps) {
     this.props.updateCodeText(`
-      const radius = ${nextProps.chartWidth.value};
-      const height = ${nextProps.chartHeight.value};
+      const radius = 350;
+      const height = 400;
+      const data = [
+        { name: 'Q1', value: 20 },
+        { name: 'Q2', value: 70 },
+        { name: 'Q3', value: 5 },
+        { name: 'Q4', value: 30 },
+      ]
 
       const arc = d3.arc()
         .innerRadius(0)
@@ -81,11 +90,11 @@ class PieChart extends Chart {
         return d3.arc().innerRadius(radius).outerRadius(radius);
       };
       
-      const arcs = pie(this.props.data);
+      const arcs = pie(data);
 
       const color = d3.scaleOrdinal()
-        .domain(this.props.data.map(d => d.name))
-        .range(d3.quantize(t => d3.interpolateSpectral(t * 0.8 + 0.1), this.props.data.length).reverse())
+        .domain(data.map(d => d.name))
+        .range(d3.quantize(t => d3.interpolateSpectral(t * 0.8 + 0.1), data.length).reverse())
         
       const svg = 
         d3.select('svg#plot_cont')
