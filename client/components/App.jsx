@@ -1,9 +1,5 @@
 import React, { Component } from 'react';
 import { csvParse } from 'd3';
-import AceEditor from 'react-ace';
-import brace from 'brace';
-import 'brace/mode/javascript';
-import 'brace/theme/monokai';
 
 
 //import styled components
@@ -15,9 +11,8 @@ import InputsDisplay from './InputsDisplay.jsx';
 import ChartDisplay from './ChartDisplay.jsx';
 import Navbar from './Navbar.jsx';
 import Footer from './Footer.jsx';
-// import CodeDisplay from  './CodeDisplay.jsx';
+import CodeDisplay from  './CodeDisplay.jsx';
 
-//The only stateful component
 class App extends Component {
   constructor() {
     super();
@@ -107,6 +102,7 @@ class App extends Component {
 
 
   updateCodeText(codeText) {
+    console.log('codetext', codeText);
     this.setState({ codeText });
   }
 
@@ -150,37 +146,14 @@ class App extends Component {
           />
         </GraphAndOptionsWrapper>
 
-        {CodeDisplay(codeText)}
-        {/* <CodeDisplay codeText={codeText} /> */}
+        <CodeDisplay
+          codeText={codeText}
+          updateCodeText={this.updateCodeText}
+        />
         <Footer />
       </MainWrapper>
     );
   }
 }
 
-const CodeDisplay = (codeText) => (
-  <AceEditor
-    mode="javascript"
-    theme="monokai"
-    name="blah2"
-    // onLoad={this.onLoad}
-    onChange={handleAce}
-    fontSize={14}
-    showPrintMargin={true}
-    showGutter={true}
-    highlightActiveLine={true}
-    value={codeText}
-    setOptions={{
-    enableBasicAutocompletion: false,
-    enableLiveAutocompletion: false,
-    enableSnippets: false,
-    showLineNumbers: true,
-    tabSize: 2,
-    }}
-  />
-)
-
-const handleAce = (e) => {
-  console.log(e);
-}
 export default App;

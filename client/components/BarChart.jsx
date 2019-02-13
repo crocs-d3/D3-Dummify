@@ -3,147 +3,150 @@ import * as d3 from 'd3';
 
 class BarChart extends Chart {
   plotGraph(el) {
-    const xData = [];
-    const yData = [];
+    eval(this.props.codeText)
+    // const xData = [];
+    // const yData = [];
 
-    // populates the yData and xData arrays
-    for (const dataPair of this.props.data) {
-      xData.push(dataPair.name);
-      yData.push(dataPair.value);
-    }
+    // // populates the yData and xData arrays
+    // for (const dataPair of this.props.data) {
+    //   xData.push(dataPair.name);
+    //   yData.push(dataPair.value);
+    // }
 
-    const svgWidth = this.props.options.chartWidth.value;
-    const svgHeight = this.props.options.chartHeight.value;
-    const barPadding = this.props.options.barMargin.value;
-    const barColor = this.props.options.barColor.value;
-    const bgColor = this.props.options.chartBGColor.value;
-    const chartName = this.props.options.chartTitle.value;
-    const yTitle = this.props.options.yTitle.value;
-    const xTitle = this.props.options.xTitle.value;
-    const barWidth = svgWidth / yData.length;
-    const margin = 40;
-    const transition = this.props.options.transition.value;
+    // const svgWidth = this.props.options.chartWidth.value;
+    // const svgHeight = this.props.options.chartHeight.value;
+    // const barPadding = this.props.options.barMargin.value;
+    // const barColor = this.props.options.barColor.value;
+    // const bgColor = this.props.options.chartBGColor.value;
+    // const chartName = this.props.options.chartTitle.value;
+    // const yTitle = this.props.options.yTitle.value;
+    // const xTitle = this.props.options.xTitle.value;
+    // const barWidth = svgWidth / yData.length;
+    // const margin = 40;
+    // const transition = this.props.options.transition.value;
 
-    // Creates a linear scale for the y-axis. The domain represents the values
-    // on the scale. The range, the height of the y-axis on the svg element.
-    const y = d3
-      .scaleLinear()
-      .domain([0, Math.max(...yData)])
-      .range([svgHeight, 0]);
+    // // Creates a linear scale for the y-axis. The domain represents the values
+    // // on the scale. The range, the height of the y-axis on the svg element.
+    // const y = d3
+    //   .scaleLinear()
+    //   .domain([0, Math.max(...yData)])
+    //   .range([svgHeight, 0]);
 
-    // For the x-axis, we have a discrete distribution, so we
-    // need to use the .scaleBand() method.
-    const x = d3
-      .scaleBand()
-      .domain(xData)
-      .rangeRound([0, svgWidth])
-      .padding(0);
+    // // For the x-axis, we have a discrete distribution, so we
+    // // need to use the .scaleBand() method.
+    // const x = d3
+    //   .scaleBand()
+    //   .domain(xData)
+    //   .rangeRound([0, svgWidth])
+    //   .padding(0);
 
-    const chart = d3.select(el);
+    // const chart = d3.select(el);
 
-    // We style the <svg> element, as well as all the <rect>
-    // created that represent the bars in our graph
-    chart
-      .style('background-color', bgColor)
-      .attr('width', svgWidth + 2 * margin)
-      .attr('height', svgHeight + 2 * margin)
-      .append('g')
-      .attr('transform', `translate(${margin},${margin})`)
-      .selectAll('rect')
-      .data(yData)
-      .enter()
-      .append('rect')
-      .attr('fill', barColor)
-      .attr('width', barWidth - barPadding)
-      .attr('height', d => svgHeight - y(d))
-      .attr('x', (d, i) => barWidth * i + parseInt(barPadding) / 2)
-      .attr('y', d => y(d));
+    // // We style the <svg> element, as well as all the <rect>
+    // // created that represent the bars in our graph
+    // chart
+    //   .style('background-color', bgColor)
+    //   .attr('width', svgWidth + 2 * margin)
+    //   .attr('height', svgHeight + 2 * margin)
+    //   .append('g')
+    //   .attr('transform', `translate(${margin},${margin})`)
+    //   .selectAll('rect')
+    //   .data(yData)
+    //   .enter()
+    //   .append('rect')
+    //   .attr('fill', barColor)
+    //   .attr('width', barWidth - barPadding)
+    //   .attr('height', d => svgHeight - y(d))
+    //   .attr('x', (d, i) => barWidth * i + parseInt(barPadding) / 2)
+    //   .attr('y', d => y(d));
 
-    // creates and style the x and y axis.
-    const xAxis = d3.axisBottom(x);
-    const yAxis = d3.axisLeft(y).ticks(5);
+    // // creates and style the x and y axis.
+    // const xAxis = d3.axisBottom(x);
+    // const yAxis = d3.axisLeft(y).ticks(5);
 
-    // the .attr() call creates the axis, while the .call()
-    // creates the ticks.
-    chart
-      .append('g')
-      .attr('transform', `translate(${margin},${svgHeight + margin})`)
-      .call(xAxis);
+    // // the .attr() call creates the axis, while the .call()
+    // // creates the ticks.
+    // chart
+    //   .append('g')
+    //   .attr('transform', `translate(${margin},${svgHeight + margin})`)
+    //   .call(xAxis);
 
-    chart
-      .append('g')
-      .attr('transform', `translate(${margin},${margin})`)
-      .call(yAxis);
+    // chart
+    //   .append('g')
+    //   .attr('transform', `translate(${margin},${margin})`)
+    //   .call(yAxis);
 
-    // adding text label & stlying for Chart Name
-    chart
-      .append('text')
-      .attr(
-        'transform',
-        'translate(' + (svgWidth / 2 + margin) + ',' + (Math.max(...yData) - margin) + ')',
-      )
-      .style('font-size', '1.5em')
-      .style('font-weight', 'bold')
-      .style('text-anchor', 'middle')
-      .text(chartName);
+    // // adding text label & stlying for Chart Name
+    // chart
+    //   .append('text')
+    //   .attr(
+    //     'transform',
+    //     'translate(' + (svgWidth / 2 + margin) + ',' + (Math.max(...yData) - margin) + ')',
+    //   )
+    //   .style('font-size', '1.5em')
+    //   .style('font-weight', 'bold')
+    //   .style('text-anchor', 'middle')
+    //   .text(chartName);
 
-    // text label & styling for the x axis
-    chart
-      .append('text')
-      .attr('x', svgWidth / 2 + margin / 2)
-      .attr('y', svgHeight + margin + margin / 2)
-      .attr('dy', '1em')
-      .style('font-size', '1em')
-      .style('font-weight', 'bold')
-      .style('text-anchor', 'middle')
-      .text(xTitle);
+    // // text label & styling for the x axis
+    // chart
+    //   .append('text')
+    //   .attr('x', svgWidth / 2 + margin / 2)
+    //   .attr('y', svgHeight + margin + margin / 2)
+    //   .attr('dy', '1em')
+    //   .style('font-size', '1em')
+    //   .style('font-weight', 'bold')
+    //   .style('text-anchor', 'middle')
+    //   .text(xTitle);
 
-    // text label & styling for the y axis
-    chart
-      .append('text')
-      .attr('transform', 'rotate(-90)')
-      .attr('x', -svgHeight / 2 - margin)
-      .attr('y', -5)
-      .attr('dy', '1em')
-      .style('font-size', '1em')
-      .style('font-weight', 'bold')
-      .style('text-anchor', 'middle')
-      .text(yTitle);
+    // // text label & styling for the y axis
+    // chart
+    //   .append('text')
+    //   .attr('transform', 'rotate(-90)')
+    //   .attr('x', -svgHeight / 2 - margin)
+    //   .attr('y', -5)
+    //   .attr('dy', '1em')
+    //   .style('font-size', '1em')
+    //   .style('font-weight', 'bold')
+    //   .style('text-anchor', 'middle')
+    //   .text(yTitle);
 
-    if (transition === '') {
-      d3.selectAll('rect')
-        .on('mouseover', function(d, i) {
-          d3.select(this)
-            .transition()
-            .duration(200)
-            .style('opacity', 0.7);
-        })
-        .on('mouseout', function(d, i) {
-          d3.select(this)
-            .transition()
-            .duration(200)
-            .style('opacity', 1);
-        });
-    }
+    // if (transition === '') {
+    //   d3.selectAll('rect')
+    //     .on('mouseover', function(d, i) {
+    //       d3.select(this)
+    //         .transition()
+    //         .duration(200)
+    //         .style('opacity', 0.7);
+    //     })
+    //     .on('mouseout', function(d, i) {
+    //       d3.select(this)
+    //         .transition()
+    //         .duration(200)
+    //         .style('opacity', 1);
+    //     });
+    // }
 
     return el;
   }
 
   updateCode(nextProps) {
     this.props.updateCodeText(`
+      // import d3 from 'd3';
       // Define basic graph properties 
-      const xData = [20, 70, 5, 30];
-      const yData = ['Q1', 'Q2', 'Q3', 'Q4'];
-      const svgWidth = ${nextProps.chartWidth.value};
-      const svgHeight = ${nextProps.chartHeight.value};
-      const barPadding = ${nextProps.barMargin.value};
-      const barColor = "${nextProps.barColor.value}";
-      const bgColor = "${nextProps.chartBGColor.value}";
-      const chartName = "${nextProps.chartTitle.value}";
-      const yTitle = "${nextProps.yTitle.value}";
-      const xTitle = "${nextProps.xTitle.value}";
-      const barWidth = ${nextProps.chartWidth.value / 4};
+      const xData = [${nextProps.data.map(el => "el.name")}];
+      const yData = [${nextProps.data.map(el => el.value)}];
+      const svgWidth = ${nextProps.options.chartWidth.value};
+      const svgHeight = ${nextProps.options.chartHeight.value};
+      const barPadding = ${nextProps.options.barMargin.value};
+      const barColor = "${nextProps.options.barColor.value}";
+      const bgColor = "${nextProps.options.chartBGColor.value}";
+      const chartName = "${nextProps.options.chartTitle.value}";
+      const yTitle = "${nextProps.options.yTitle.value}";
+      const xTitle = "${nextProps.options.xTitle.value}";
+      const barWidth = ${nextProps.options.chartWidth.value / 4};
       const margin = 40;  
+
 
       // Creates a linear scale for the y-axis. The domain represents the values
       // on the scale. The range, the height of the y-axis on the svg element.
@@ -160,10 +163,10 @@ class BarChart extends Chart {
         .rangeRound([0, svgWidth])
         .padding(0);
   
-      // 'svg#plot_cont' is the CSS-selector for the element we 
-      // want to plot the graph in.
-      const chart = d3.select('svg#plot_cont');
+      // el is the svg passed to the function that creates the graph
+      const chart = d3.select(el);
 
+      
       chart
         // styles the svg component
         .style("background-color", bgColor)
@@ -178,7 +181,7 @@ class BarChart extends Chart {
         // select all <rect> inside of that <g> we just created.
         // ps: there are none!  
         .selectAll('rect')
-        .data(dataset)
+        .data(yData)
 
         // we append and style one <rect> for each value in our dataset.
         .enter().append('rect')
@@ -234,6 +237,7 @@ class BarChart extends Chart {
         .style('font-weight', 'bold')
         .style('text-anchor', 'middle')
         .text(yTitle);
+
     `);
   }
 }
