@@ -9,14 +9,14 @@ export const MainWrapper = styled.main`
   overflow-x: hidden;
   box-sizing: border-box;
 `;
-  
+
 export const Title = styled.h1`
   color: #001230;
   font-family: 'Major Mono Display', monospace;
   font-size: 4em;
   margin: 0.5em 0;
 `;
-  
+
 export const ChartWrapper = styled.section`
   overflow-x: auto;
   overflow-y: auto;
@@ -39,7 +39,7 @@ export const OptionsWrapper = styled.section`
 export const GraphAndOptionsWrapper = styled.section`
   display: grid;
   grid-template-columns: 30% 70%;
-  margin: 2em 0;
+  margin: 8em 0;
   height: 400px;
 `;
 
@@ -69,7 +69,9 @@ export const Input = styled.input`
   text-align: center;
   margin: 0;
 
-  &[name="yTitle"], &[name="xTitle"], &[name="chartTitle"] {
+  &[name='yTitle'],
+  &[name='xTitle'],
+  &[name='chartTitle'] {
     width: 6em;
   }
 `;
@@ -84,14 +86,14 @@ export const Button = styled.button`
   padding: 0.5em;
   border-radius: 5px;
   outline: none;
-  box-shadow: 2px 2px 5px 0px rgba(0,0,0,0.75);
+  box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 0.75);
 
   &:hover {
     background-color: white;
   }
 `;
 
-export const PreviewsWrapper = styled.div `
+export const PreviewsWrapper = styled.div`
   display: flex;
   width: 80%;
   margin: 0 auto;
@@ -99,7 +101,15 @@ export const PreviewsWrapper = styled.div `
   justify-content: center;
 
   & > div {
-    padding: 0 10px
+    padding: 0 10px;
   }
 `;
 
+export const OptionsTitle = styled.div`
+  font-family: 'Cantarell', sans-serif;
+  font-size: 1.5em;
+  font-weight: bold;
+  padding: 0.2em;
+  cursor: pointer;
+  text-align: center;
+`;

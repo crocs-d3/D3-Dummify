@@ -1,19 +1,18 @@
 import React from 'react';
 import OptionDisplay from './OptionDisplay.jsx';
-import { OptionsWrapper } from "./../Styles/styledComponents";
+import { OptionsWrapper, OptionsTitle } from './../Styles/styledComponents';
 
 const OptionsDisplay = props => {
   // iterate through the options passed in
   // and create a component to display each of them
   return (
-    <OptionsWrapper
-      id='options'
-      onClick={props.changeDisplay} 
-    >
-      Options
+    <OptionsWrapper>
+      <OptionsTitle id="options" onClick={props.changeDisplay}>
+        Options
+      </OptionsTitle>
       {buildOptions(props)}
     </OptionsWrapper>
-  ) 
+  );
 };
 
 const buildOptions = props => {
@@ -27,6 +26,6 @@ const buildOptions = props => {
       key={i}
     />
   ));
-}
+};
 
 export default OptionsDisplay;

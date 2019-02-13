@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 import OptionsDisplay from './OptionsDisplay.jsx';
 import DataInput from './DataInput.jsx';
 
@@ -6,15 +6,16 @@ class InputsDisplay extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      display: 'options',
-    }
+      display: 'options'
+    };
     this.changeDisplay = this.changeDisplay.bind(this);
   }
 
   changeDisplay(e) {
     let { id } = e.target;
+    console.log(id);
     if (id === 'data' || id === 'options') {
-      this.setState({ display: id});
+      this.setState({ display: id });
     }
   }
 
@@ -33,7 +34,7 @@ class InputsDisplay extends Component {
           handleDataInput={this.props.handleDataInput}
         />
       </div>
-    )
+    );
   }
 }
 
