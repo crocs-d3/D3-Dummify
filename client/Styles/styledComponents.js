@@ -39,7 +39,7 @@ export const OptionsWrapper = styled.section`
 export const GraphAndOptionsWrapper = styled.section`
   display: grid;
   grid-template-columns: 30% 70%;
-  margin: 3em 0;
+  margin: 2em 0;
   height: 400px;
 `;
 
