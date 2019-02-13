@@ -2,7 +2,7 @@ import Chart from '../classes/Chart';
 import * as d3 from 'd3';
 
 class BarChart extends Chart {
-  plotGraph() {
+  plotGraph(el) {
     const xData = [];
     const yData = [];
 
@@ -39,7 +39,7 @@ class BarChart extends Chart {
       .rangeRound([0, svgWidth])
       .padding(0);
 
-    const chart = d3.select('svg#plot_cont');
+    const chart = d3.select(el);
 
     // We style the <svg> element, as well as all the <rect>
     // created that represent the bars in our graph
@@ -125,6 +125,8 @@ class BarChart extends Chart {
             .style('opacity', 1);
         });
     }
+
+    return el;
   }
 
   updateCode(nextProps) {
@@ -135,11 +137,11 @@ class BarChart extends Chart {
       const svgWidth = ${nextProps.chartWidth.value};
       const svgHeight = ${nextProps.chartHeight.value};
       const barPadding = ${nextProps.barMargin.value};
-      const barColor = ${nextProps.barColor.value};
-      const bgColor = ${nextProps.chartBGColor.value};
-      const chartName = ${nextProps.chartTitle.value};
-      const yTitle = ${nextProps.yTitle.value};
-      const xTitle = ${nextProps.xTitle.value};
+      const barColor = "${nextProps.barColor.value}";
+      const bgColor = "${nextProps.chartBGColor.value}";
+      const chartName = "${nextProps.chartTitle.value}";
+      const yTitle = "${nextProps.yTitle.value}";
+      const xTitle = "${nextProps.xTitle.value}";
       const barWidth = ${nextProps.chartWidth.value / 4};
       const margin = 40;  
 

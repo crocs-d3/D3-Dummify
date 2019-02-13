@@ -18,6 +18,10 @@ module.exports = {
       {
         test: /\.css$/,
         use: ['style-loader', 'css-loader']
+      },
+      {
+        test: /\.(png|jpg)$/,
+        loader: 'url-loader',
       }
     ]
   },
@@ -28,6 +32,6 @@ module.exports = {
   devServer: {
     hot: true,
     publicPath: 'http://localhost:8080/build/',
-    contentBase: './'
+    contentBase: ['./', './imgs']
   }
 }

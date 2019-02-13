@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
-import path from 'path';
+import { csvParse } from 'd3';
+import AceEditor from 'react-ace';
+import brace from 'brace';
+import 'brace/mode/javascript';
+import 'brace/theme/monokai';
 
 
 //import styled components
@@ -7,11 +11,11 @@ import { MainWrapper, Title, GraphAndOptionsWrapper } from './../Styles/styledCo
 
 //import components to render
 import ChartTypeDisplayContainer from './ChartsTypeDisplayContainer.jsx';
-import OptionsDisplay from './OptionsDisplay.jsx';
+import InputsDisplay from './InputsDisplay.jsx';
 import ChartDisplay from './ChartDisplay.jsx';
 import Navbar from './Navbar.jsx';
 import Footer from './Footer.jsx';
-import CodeDisplay from './CodeDisplay.jsx';
+// import CodeDisplay from  './CodeDisplay.jsx';
 
 //The only stateful component
 class App extends Component {
@@ -48,7 +52,7 @@ class App extends Component {
         PieChart: ['chartWidth', 'chartHeight', 'chartTitle'],
       },
 
-      // all option options
+      // all available options
       chartTitle: { value: 'Name', type: 'text' },
       chartHeight: { value: 300, type: 'number' },
       chartWidth: { value: 450, type: 'number' },
@@ -64,6 +68,7 @@ class App extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.updateCodeText = this.updateCodeText.bind(this);
     this.changeGraph = this.changeGraph.bind(this);
+    this.handleDataInput = this.handleDataInput.bind(this);
   }
 
   // handle user interaction with inputs
@@ -83,20 +88,35 @@ class App extends Component {
     });
   }
 
+  handleDataInput(file){
+    const reader = new FileReader();
+
+    reader.onload = () => {
+      const csv = reader.result;
+
+      const data = csvParse(csv, d => ({
+        name: d.name,
+        value: +d.value
+      }));
+      this.setState({data: data})
+    }
+
+    reader.readAsText(file, 'UTF-8')
+  }
+
+
   updateCodeText(codeText) {
     this.setState({ codeText });
   }
 
-  changeGraph(){
-    const newType = this.state.type === 'PieChart' ? 'BarChart' : "PieChart";
+  changeGraph(e){
     this.setState({
-      type: newType,
+      type: e.target.alt
     })
   }
 
   render() {
     const { graphs, type, codeText, data, imgs } = this.state;
-
     // filter out the options to only pass the props that correspond
     // to a chosen graph
     const optionsToPass = graphs[type].reduce((acc, option) => {
@@ -115,7 +135,11 @@ class App extends Component {
         />
         <GraphAndOptionsWrapper>
           {/* Container that has each option as a child components */}
-          <OptionsDisplay options={optionsToPass} handleChange={this.handleChange} />
+          <InputsDisplay
+            options={optionsToPass}
+            handleChange={this.handleChange}
+            handleDataInput={this.handleDataInput}
+          />
           <ChartDisplay
             options={optionsToPass}
             data={data}
@@ -125,11 +149,37 @@ class App extends Component {
           />
         </GraphAndOptionsWrapper>
 
-        <CodeDisplay codeText={codeText} />
+        {CodeDisplay(codeText)}
+        {/* <CodeDisplay codeText={codeText} /> */}
         <Footer />
       </MainWrapper>
     );
   }
 }
 
+const CodeDisplay = (codeText) => (
+  <AceEditor
+    mode="javascript"
+    theme="monokai"
+    name="blah2"
+    // onLoad={this.onLoad}
+    onChange={handleAce}
+    fontSize={14}
+    showPrintMargin={true}
+    showGutter={true}
+    highlightActiveLine={true}
+    value={codeText}
+    setOptions={{
+    enableBasicAutocompletion: false,
+    enableLiveAutocompletion: false,
+    enableSnippets: false,
+    showLineNumbers: true,
+    tabSize: 2,
+    }}
+  />
+)
+
+const handleAce = (e) => {
+  console.log(e);
+}
 export default App;

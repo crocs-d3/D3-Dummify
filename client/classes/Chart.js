@@ -1,15 +1,10 @@
 import React, { Component } from 'react';
+import ReactFauxDOM from 'react-faux-dom';
 
 class Chart extends Component {
   constructor() {
     super();
     this.debouncerTracker = 0;
-  }
-
-  componentDidUpdate() {
-    // everytime the component updates, we replot the graph.
-    document.querySelector('svg#plot_cont').innerHTML = '';
-    this.plotGraph();
   }
 
   componentDidMount() {
@@ -42,9 +37,9 @@ class Chart extends Component {
     } 
     return false;
   }
-
   render() {
-    return <svg id="plot_cont" />;
+    var svg = ReactFauxDOM.createElement('svg');
+    return (this.plotGraph(svg)).toReact()
   }
 }
 
