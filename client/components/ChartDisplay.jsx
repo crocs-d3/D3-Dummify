@@ -2,6 +2,7 @@ import React from 'react';
 import BarChart from './BarChart.jsx';
 import PieChart from './PieChart.jsx';
 import BubbleChart from './BubbleChart.jsx';
+import LineChart from './LineChart.jsx';
 import { ChartWrapper} from './../Styles/styledComponents';
 
 const ChartDisplay = props => {
@@ -10,7 +11,8 @@ const ChartDisplay = props => {
   const children = {
     BarChart: <BarChart {...props}/>,
     PieChart: <PieChart {...props}/>,
-    BubbleChart: <BubbleChart {...props} />
+    BubbleChart: <BubbleChart {...props} />,
+    LineChart: <LineChart {...props} />
   }
   return (
     <ChartWrapper>

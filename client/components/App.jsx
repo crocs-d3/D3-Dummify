@@ -45,7 +45,8 @@ class App extends Component {
           'transition',
         ],
         PieChart: ['chartWidth', 'chartHeight', 'chartTitle'],
-        BubbleChart: ['chartWidth', 'chartHeight', 'chartTitle']
+        BubbleChart: ['chartWidth', 'chartHeight', 'chartTitle'],
+        LineChart: ['chartTitle', 'chartWidth', 'chartHeight'],
       },
 
       // all available options
