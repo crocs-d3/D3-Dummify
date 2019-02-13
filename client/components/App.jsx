@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import path from 'path';
 
-
 //import styled components
 import { MainWrapper, Title, GraphAndOptionsWrapper } from './../Styles/styledComponents';
 
@@ -22,7 +21,7 @@ class App extends Component {
         { name: 'Q1', value: 20 },
         { name: 'Q2', value: 70 },
         { name: 'Q3', value: 5 },
-        { name: 'Q4', value: 30 },
+        { name: 'Q4', value: 30 }
       ],
       // will be modified to reflect the code used to build the graph
       codeText: '',
@@ -43,9 +42,10 @@ class App extends Component {
           'chartTitle',
           'xTitle',
           'yTitle',
-          'transition',
+          'transition'
         ],
         PieChart: ['chartWidth', 'chartHeight', 'chartTitle'],
+        BubbleChart: ['chartWidth', 'chartHeight', 'chartTitle']
       },
 
       // all option options
@@ -57,7 +57,7 @@ class App extends Component {
       yTitle: { value: 'Rainfall (cm)', type: 'text' },
       barColor: { value: '#7e8471', type: 'color' },
       barMargin: { value: 2, type: 'number' },
-      transition: { name: 'false', type: 'checkbox' },
+      transition: { name: 'false', type: 'checkbox' }
     };
 
     // binding functions that are passed to children components
@@ -79,7 +79,7 @@ class App extends Component {
 
     // update the state for corresponding options
     this.setState({
-      [name]: newObj,
+      [name]: newObj
     });
   }
 
@@ -87,11 +87,11 @@ class App extends Component {
     this.setState({ codeText });
   }
 
-  changeGraph(){
-    const newType = this.state.type === 'PieChart' ? 'BarChart' : "PieChart";
+  changeGraph() {
+    const newType = this.state.type === 'PieChart' ? 'BubbleChart' : 'PieChart';
     this.setState({
-      type: newType,
-    })
+      type: newType
+    });
   }
 
   render() {
@@ -109,10 +109,7 @@ class App extends Component {
         <Navbar />
         <Title>D3 Simplifier</Title>
 
-        <ChartTypeDisplayContainer
-          types={Object.keys(graphs)} 
-          changeGraph={this.changeGraph}
-        />
+        <ChartTypeDisplayContainer types={Object.keys(graphs)} changeGraph={this.changeGraph} />
         <GraphAndOptionsWrapper>
           {/* Container that has each option as a child components */}
           <OptionsDisplay options={optionsToPass} handleChange={this.handleChange} />
